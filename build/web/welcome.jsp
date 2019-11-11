@@ -29,11 +29,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="Productos.jsp"  /><i class="fa fa-fw fa-folder-open" ></i> Productos</a>
-
+                        <a class="nav-link" href="Productos.jsp"><i class="fa fa-fw fa-folder-open"></i> Productos</a>
                     </li>
-
-
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -45,7 +42,7 @@
                             <a class="dropdown-item" href="#">Lácteos y Huevos</a>
                         </div>
                     </li>
-
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="Clientes.jsp" ><i class="fa fa-fw fa-user" ></i> Clientes</a>
                     </li>
@@ -101,25 +98,23 @@
         </nav>
 
         <img src="img/images.jpg" class="img-fluid" alt="img-fluid" width="100%"> 
-
-        <br><br><br>
-        <h1 style="color: #252850; margin-left: 50px;">ABARROTES</h1><br>
+        
+        <h1 style="color: #252850; margin-left: 50px;" class="mt-4">ABARROTES</h1><br>
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <center> <img src="img/azucar.png" class="img-fluid" alt="img-fluide" > </center>
+                    <center><a href=""><img src="img/azucar.png" class="img-fluid" alt="img-fluide"></a></center>
                 </div>
                 <div class="col-sm">
-                    <center><img src="img/azucar.png" class="img-fluid" alt="img-fluid" > </center>
+                    <center><a href=""><img src="img/azucar_blanca.jpg" class="img-fluid" alt="img-fluid"></a></center>
                 </div>
                 <div class="col-sm">
-                    <center><img src="img/azucar.png" class="img-fluid" alt="img-fluid" > </center>
+                    <center><a href=""><img src="img/atun.png" class="img-fluid" alt="img-fluid"></a></center>
                 </div>
             </div>
         </div>
-        <br><br><br>
-
-        <h1 style="color: #252850; margin-left: 50px;">FRUTAS Y VERDURAS</h1><br>
+        
+        <h1 style="color: #252850; margin-left: 50px;" class="mt-4">FRUTAS Y VERDURAS</h1><br>
         <div class="container">
             <div class="row">
                 <div class="col-sm">
@@ -140,9 +135,9 @@
         </footer>-->
         
         <!-- Footer -->
-        <footer class="page-footer font-small blue pt-4">
+        <footer class="page-footer font-small blue pt-4 ">
             <!-- Footer Links -->
-            <div class="container-fluid text-center text-md-left" style="background-color: gainsboro">
+            <div class="container-fluid text-center text-md-left pb-3 pt-2" style="background-color: gainsboro">
                 <!-- Grid row -->
                 <div class="row">
                     <!-- Grid column -->
@@ -224,10 +219,7 @@
                 <!-- Grid row -->
             </div>
             <!-- Footer Links -->
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2019 Copyright:
-                <a href=""> Grupo 3</a>
-            </div>
+            <!-- Copyright -->            
             <!-- Copyright -->
         </footer>
         <!-- Footer -->
