@@ -122,88 +122,50 @@
                 
                 
                 
+                
+                
              }catch(Exception ex){
              }
 
             %>                       
                         
         <img src="img/images.jpg" class="img-fluid" alt="img-fluid" width="100%">        
-        <h2 style="color: #252850; margin-left: 50px;" class="mt-4"><%=catObj.getDescripcion() %></h2>
+        <!--<h2 style="color: #252850; margin-left: 50px;" class="mt-4"></h2>-->
         
         <div class="container">
             <div class="row">
-                <!--<div class="col-sm">
+                <div class="col-sm">
+                    
+                    <%
+                        ArrayList<Producto> lstprod; 
+                        int idclase;
+                        Clase clasObj=null;
+                        try{      
+                            idclase=Integer.parseInt(request.getParameter("idclase"));
+                        }                            
+                        catch(Exception ex){
+                        }
+                        
+                        
+                            
+                        
+
+                    %>
+                    
+                    
                     <center><a href=""><img src="img/azucar.png" class="img-fluid" alt="img-fluide"></a></center>
                 </div>                
-                <div class="col-sm">
+                
+                
+                <!--<div class="col-sm">
                     <center><a href=""><img src="img/azucar_blanca.jpg" class="img-fluid" alt="img-fluid"></a></center>
                 </div>
                 <div class="col-sm">
                     <center><a href=""><img src="img/atun.png" class="img-fluid" alt="img-fluid"></a></center>
                 </div>-->
-                <ul>
-                    <%                     
-                    ArrayList<Subcategoria> lstsubcate;
-                    Subcategoria SubCateObj;
-                    Clase ClasObj=null;
-                    ConsultaSubCategoria modsubcate=new ConsultaSubCategoria();
-                    lstsubcate=modsubcate.buscarSubcategoria(catObj);
-                    int acumfil=0;
-                    
-                    for (int i = 0; i < lstsubcate.size(); i++) {
-                        SubCateObj=null;
-                        SubCateObj= (Subcategoria)lstsubcate.get(i);
-                        if(acumfil+1>=20){
-                            acumfil=0;                
-                    %>
-                        </ul>
-                        </div>
-                        <div class="col-sm">
-                                <ul>
-                                <li><%=SubCateObj.getDescripcion()%>
-                                    <% acumfil+=1; 
-
-                                    ArrayList<Clase> lstclas;
-                                    
-                                    ConsultaClase modclas=new ConsultaClase();
-                                    lstclas=modclas.buscarClase(SubCateObj); 
-                                    
-                                    %>
-                                    <ul>
-                                        <% for (int j = 0; j < lstclas.size(); j++) {                                            
-                                            ClasObj=(Clase)lstclas.get(j);
-                                            acumfil+=1;
-                                        %>                                    
-                                        <li><a href="catalogo.jsp?idclase=<%=ClasObj.getId()%>"><%=ClasObj.getDescripcion()%></a></li>
-                                        <% } %>                                        
-                                    </ul>
-                                </li>
-                        <% }else{ %>
-                            
-                            <li><%=SubCateObj.getDescripcion()%>
-                                <% acumfil+=1; 
-                                
-                                ArrayList<Clase> lstclas;
-                                
-                                ConsultaClase modclas=new ConsultaClase();
-                                lstclas=modclas.buscarClase(SubCateObj);
-                                
-                                %>
-                                
-                                <ul>
-                                    <% for (int j = 0; j < lstclas.size(); j++) {                                            
-                                        ClasObj=(Clase)lstclas.get(j);
-                                        acumfil+=1;
-                                    %>                                    
-                                    <li><a href="catalogo.jsp?idclase=<%=ClasObj.getId()%>"><%=ClasObj.getDescripcion()%></a></li>
-                                    <% } %>                                        
-                                </ul>                                
-                            </li>
-                           
-                        <% }} %>
-                        </ul>
-                        </div>           
-                </div>
+                
+            </div>           
+        </div>
        
         
         <!--<h2 style="color: #252850; margin-left: 50px;" class="mt-4">FRUTAS Y VERDURAS</h2><br>

@@ -10,31 +10,32 @@ import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  *
  * @author jjara
  */
-public class ConsultaSubCategoria extends Conexion {
+public class ConsultaClase extends Conexion {
     
-    public ArrayList<Subcategoria> buscarSubcategoria(Categoria cat){
-        ArrayList<Subcategoria> subcates;
+    public ArrayList<Clase> buscarClase(Subcategoria subcat){
+        ArrayList<Clase> clases;
         PreparedStatement ps=null;
         ResultSet rs=null;
         Connection con = getConnection();
-        String sql="SELECT id,descripcion FROM subcategoria WHERE categoria=?";              
-        subcates=new ArrayList<>();
+        String sql="SELECT id,descripcion FROM clase WHERE subcategoria=?";              
+        clases=new ArrayList<>();
         try {            
             ps=(PreparedStatement) con.prepareStatement(sql);
-            ps.setInt(1, cat.getId());
+            ps.setInt(1, subcat.getId());
             rs=ps.executeQuery();            
             while(rs.next()){                
-                Subcategoria subcate = new Subcategoria();
+                Clase clas = new Clase();
                 //orgdata.nombre=rs.getString("jefe");
-                subcate.setId(rs.getInt("id"));
-                subcate.setDescripcion(rs.getString("descripcion"));
-                subcates.add(subcate);
+                clas.setId(rs.getInt("id"));
+                clas.setDescripcion(rs.getString("descripcion"));
+                clases.add(clas);
             }
-            return subcates;          
+            return clases;          
             //return false;
         } catch (SQLException e) {
             System.err.println(e);
@@ -42,4 +43,5 @@ public class ConsultaSubCategoria extends Conexion {
         }
         return null;
     }
+    
 }

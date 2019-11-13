@@ -16,15 +16,17 @@ import java.util.ArrayList;
  * @author jjara
  */
 public class ConsultaCategoria extends Conexion {
-    public ArrayList<Categoria> buscarCategoria(){
+    
+    public ArrayList<Categoria> buscarCategoria(Categoria cat){
         ArrayList<Categoria> cates;
         PreparedStatement ps=null;
         ResultSet rs=null;
         Connection con = getConnection();
-        String sql="SELECT descripcion FROM categoria WHERE id=?";              
+        String sql="SELECT id,descripcion FROM categorias WHERE id=?";              
         cates=new ArrayList<>();
         try {            
             ps=(PreparedStatement) con.prepareStatement(sql);
+            ps.setInt(1, cat.getId());
             rs=ps.executeQuery();            
             while(rs.next()){                
                 Categoria cate = new Categoria();

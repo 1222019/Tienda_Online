@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import modelo.*;
+import java.util.*;
 
 public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -41,6 +43,8 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("\r\n");
@@ -60,8 +64,7 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        \r\n");
       out.write("    </head>\r\n");
       out.write("\r\n");
-      out.write("    <body>\r\n");
-      out.write("\r\n");
+      out.write("    \r\n");
       out.write("    <body>\r\n");
       out.write("        <nav class=\"navbar navbar-expand-lg navbar-light \" >\r\n");
       out.write("\r\n");
@@ -82,8 +85,8 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <i class=\"fa fa-fw fa-sitemap\" ></i>Categorias\r\n");
       out.write("                        </a>\r\n");
       out.write("                        <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\r\n");
-      out.write("                            <a class=\"dropdown-item\" href=\"Abarrotes.jsp\">Abarrotes</a>\r\n");
-      out.write("                            <a class=\"dropdown-item\" href=\"#\">Frutas y Verduras</a>\r\n");
+      out.write("                            <a class=\"dropdown-item\" href=\"welcomeT.jsp?idcate=1\">Abarrotes</a>\r\n");
+      out.write("                            <a class=\"dropdown-item\" href=\"welcomeT.jsp?idcate=2\">Frutas y Verduras</a>\r\n");
       out.write("                            <a class=\"dropdown-item\" href=\"#\">Lácteos y Huevos</a>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </li>\r\n");
@@ -111,7 +114,7 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <a href=\"#\"><i class=\"fa fa-fw fa-shopping-cart\" ></i> Carrito</a>\r\n");
       out.write("                    </button>\r\n");
       out.write("                    <div class=\"dropdown-menu text-center\">\r\n");
-      out.write("\r\n");
+      out.write("                    \r\n");
       out.write("\r\n");
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
@@ -143,25 +146,146 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("        </nav>\r\n");
-      out.write("\r\n");
-      out.write("        <img src=\"img/images.jpg\" class=\"img-fluid\" alt=\"img-fluid\" width=\"100%\"> \r\n");
+      out.write("                                \r\n");
+      out.write("         ");
+ 
+             Categoria catObj=new Categoria();
+             try{           
+                int idcate=0;
+                ArrayList<Categoria> lstCat; 
+                if(request.getParameter("idcate")=="" || request.getParameter("idcate")==null){
+                    idcate=1;
+                    System.out.println(request.getParameter("idcate"));
+                }else{
+                    idcate=Integer.parseInt(request.getParameter("idcate"));
+                }
+                catObj=new Categoria();
+                catObj.setId(idcate);
+                
+                ConsultaCategoria modCate=new ConsultaCategoria();
+                lstCat=modCate.buscarCategoria(catObj);
+                
+                for (int i = 0; i < lstCat.size(); i++) {
+                    catObj=null;
+                    catObj= (Categoria)lstCat.get(i);              
+                }
+                
+                
+                
+             }catch(Exception ex){
+             }
+
+            
+      out.write("                       \r\n");
+      out.write("                        \r\n");
+      out.write("        <img src=\"img/images.jpg\" class=\"img-fluid\" alt=\"img-fluid\" width=\"100%\">        \r\n");
+      out.write("        <h2 style=\"color: #252850; margin-left: 50px;\" class=\"mt-4\">");
+      out.print(catObj.getDescripcion() );
+      out.write("</h2>\r\n");
       out.write("        \r\n");
-      out.write("        <h2 style=\"color: #252850; margin-left: 50px;\" class=\"mt-4\">ABARROTES</h2><br>\r\n");
       out.write("        <div class=\"container\">\r\n");
       out.write("            <div class=\"row\">\r\n");
-      out.write("                <div class=\"col-sm\">\r\n");
+      out.write("                <!--<div class=\"col-sm\">\r\n");
       out.write("                    <center><a href=\"\"><img src=\"img/azucar.png\" class=\"img-fluid\" alt=\"img-fluide\"></a></center>\r\n");
-      out.write("                </div>\r\n");
+      out.write("                </div>                \r\n");
       out.write("                <div class=\"col-sm\">\r\n");
       out.write("                    <center><a href=\"\"><img src=\"img/azucar_blanca.jpg\" class=\"img-fluid\" alt=\"img-fluid\"></a></center>\r\n");
       out.write("                </div>\r\n");
       out.write("                <div class=\"col-sm\">\r\n");
       out.write("                    <center><a href=\"\"><img src=\"img/atun.png\" class=\"img-fluid\" alt=\"img-fluid\"></a></center>\r\n");
+      out.write("                </div>-->\r\n");
+      out.write("                <ul>\r\n");
+      out.write("                    ");
+                     
+                    ArrayList<Subcategoria> lstsubcate;
+                    Subcategoria SubCateObj;
+                    Clase ClasObj=null;
+                    ConsultaSubCategoria modsubcate=new ConsultaSubCategoria();
+                    lstsubcate=modsubcate.buscarSubcategoria(catObj);
+                    int acumfil=0;
+                    
+                    for (int i = 0; i < lstsubcate.size(); i++) {
+                        SubCateObj=null;
+                        SubCateObj= (Subcategoria)lstsubcate.get(i);
+                        if(acumfil+1>=20){
+                            acumfil=0;                
+                    
+      out.write("\r\n");
+      out.write("                        </ul>\r\n");
+      out.write("                        </div>\r\n");
+      out.write("                        <div class=\"col-sm\">\r\n");
+      out.write("                                <ul>\r\n");
+      out.write("                                <li>");
+      out.print(SubCateObj.getDescripcion());
+      out.write("\r\n");
+      out.write("                                    ");
+ acumfil+=1; 
+
+                                    ArrayList<Clase> lstclas;
+                                    
+                                    ConsultaClase modclas=new ConsultaClase();
+                                    lstclas=modclas.buscarClase(SubCateObj); 
+                                    
+                                    
+      out.write("\r\n");
+      out.write("                                    <ul>\r\n");
+      out.write("                                        ");
+ for (int j = 0; j < lstclas.size(); j++) {                                            
+                                            ClasObj=(Clase)lstclas.get(i);
+                                            acumfil+=1;
+                                        
+      out.write("                                    \r\n");
+      out.write("                                        <li>");
+      out.print(ClasObj.getDescripcion());
+      out.write("</li>\r\n");
+      out.write("                                        ");
+ } 
+      out.write("                                        \r\n");
+      out.write("                                    </ul>\r\n");
+      out.write("                                </li>\r\n");
+      out.write("                        ");
+ }else{ 
+      out.write("\r\n");
+      out.write("                            \r\n");
+      out.write("                            <li>");
+      out.print(SubCateObj.getDescripcion());
+      out.write("\r\n");
+      out.write("                                ");
+ acumfil+=1; 
+                                
+                                ArrayList<Clase> lstclas;
+                                
+                                ConsultaClase modclas=new ConsultaClase();
+                                lstclas=modclas.buscarClase(SubCateObj);
+                                
+                                
+      out.write("\r\n");
+      out.write("                                \r\n");
+      out.write("                                <ul>\r\n");
+      out.write("                                    ");
+ for (int j = 0; j < lstclas.size(); j++) {                                            
+                                        ClasObj=(Clase)lstclas.get(i);
+                                        acumfil+=1;
+                                    
+      out.write("                                    \r\n");
+      out.write("                                    <li>");
+      out.print(ClasObj.getDescripcion());
+      out.write("</li>\r\n");
+      out.write("                                    ");
+ } 
+      out.write("                                        \r\n");
+      out.write("                                </ul>                                \r\n");
+      out.write("                            </li>\r\n");
+      out.write("                           \r\n");
+      out.write("                        ");
+ }} 
+      out.write("\r\n");
+      out.write("                        </ul>\r\n");
+      out.write("                        </div>           \r\n");
       out.write("                </div>\r\n");
-      out.write("            </div>\r\n");
-      out.write("        </div>\r\n");
+      out.write("       \r\n");
       out.write("        \r\n");
-      out.write("        <h2 style=\"color: #252850; margin-left: 50px;\" class=\"mt-4\">FRUTAS Y VERDURAS</h2><br>\r\n");
+      out.write("        <!--<h2 style=\"color: #252850; margin-left: 50px;\" class=\"mt-4\">FRUTAS Y VERDURAS</h2><br>\r\n");
       out.write("        <div class=\"container\">\r\n");
       out.write("            <div class=\"row\">\r\n");
       out.write("                <div class=\"col-sm\">\r\n");
@@ -174,7 +298,7 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <center><img src=\"img/zapallo.JPG\" class=\"img-fluid\" alt=\"img-fluid\" > </center>\r\n");
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
-      out.write("        </div>\r\n");
+      out.write("        </div>-->\r\n");
       out.write("\r\n");
       out.write("        <!--<footer class=\"footer mt-auto py-3\">\r\n");
       out.write("            <div class=\"container\">              \r\n");
@@ -194,7 +318,7 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <p>Here you can use rows and columns to organize your footer content.</p>-->\r\n");
       out.write("                        \r\n");
       out.write("                        <div class=\"Footer-left\">\r\n");
-      out.write("                            <h2 class=\"title-xl\">Comunícate con nosotros</h2>\r\n");
+      out.write("                            <h3 class=\"title-xl\">Comunícate con nosotros</h3>\r\n");
       out.write("                            <div class=\"Footer__phones\">\r\n");
       out.write("                                <div>\r\n");
       out.write("                                    Lima: <a title=\"Teléfono Lima\" class=\"Footer__phonelink\" href=\"tel:+5116746800\">(511)674-6800</a>\r\n");
@@ -204,7 +328,7 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                </div>\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <div class=\"Footer__social\">\r\n");
-      out.write("                                <h4 class=\"Footer__accordion__title\">Síguenos en:</h4>\r\n");
+      out.write("                                <h3 class=\"Footer__accordion__title\">Síguenos en:</h3>\r\n");
       out.write("                                <div>\r\n");
       out.write("                                    <!--<a title=\"Facebook\" class=\"Follow\" href=\"\" target=\"_blank\">\r\n");
       out.write("                                        <i class=\"fa fa-facebook\"></i><span>Facebook</span>\r\n");
@@ -270,9 +394,6 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <!-- Copyright -->\r\n");
       out.write("        </footer>\r\n");
       out.write("        <!-- Footer -->\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
       out.write("        <!--js-->\r\n");
       out.write("        <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\r\n");
       out.write("        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\r\n");

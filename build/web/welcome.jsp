@@ -1,3 +1,5 @@
+<%@page import="modelo.*" %>
+<%@page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 
@@ -15,8 +17,7 @@
         
     </head>
 
-    <body>
-
+    
     <body>
         <nav class="navbar navbar-expand-lg navbar-light " >
 
@@ -37,9 +38,9 @@
                             <i class="fa fa-fw fa-sitemap" ></i>Categorias
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="Abarrotes.jsp">Abarrotes</a>
-                            <a class="dropdown-item" href="#">Frutas y Verduras</a>
-                            <a class="dropdown-item" href="#">Lácteos y Huevos</a>
+                            <a class="dropdown-item" href="welcome.jsp?idcate=1">Abarrotes</a>
+                            <a class="dropdown-item" href="welcome.jsp?idcate=2">Frutas y Verduras</a>
+                            <!--<a class="dropdown-item" href="#">Lácteos y Huevos</a>-->
                         </div>
                     </li>
                     
@@ -66,7 +67,7 @@
                         <a href="#"><i class="fa fa-fw fa-shopping-cart" ></i> Carrito</a>
                     </button>
                     <div class="dropdown-menu text-center">
-
+                    
 
                     </div>
                 </div>
@@ -96,25 +97,116 @@
                 </div>
             </div>
         </nav>
+                                
+         <% 
+             Categoria catObj=new Categoria();
+             try{           
+                int idcate=0;
+                ArrayList<Categoria> lstCat; 
+                if(request.getParameter("idcate")=="" || request.getParameter("idcate")==null){
+                    idcate=1;
+                    System.out.println(request.getParameter("idcate"));
+                }else{
+                    idcate=Integer.parseInt(request.getParameter("idcate"));
+                }
+                catObj=new Categoria();
+                catObj.setId(idcate);
+                
+                ConsultaCategoria modCate=new ConsultaCategoria();
+                lstCat=modCate.buscarCategoria(catObj);
+                
+                for (int i = 0; i < lstCat.size(); i++) {
+                    catObj=null;
+                    catObj= (Categoria)lstCat.get(i);              
+                }
+                
+                
+                
+             }catch(Exception ex){
+             }
 
-        <img src="img/images.jpg" class="img-fluid" alt="img-fluid" width="100%"> 
+            %>                       
+                        
+        <img src="img/images.jpg" class="img-fluid" alt="img-fluid" width="100%">        
+        <h2 style="color: #252850; margin-left: 50px;" class="mt-4"><%=catObj.getDescripcion() %></h2>
         
-        <h1 style="color: #252850; margin-left: 50px;" class="mt-4">ABARROTES</h1><br>
         <div class="container">
             <div class="row">
-                <div class="col-sm">
+                <!--<div class="col-sm">
                     <center><a href=""><img src="img/azucar.png" class="img-fluid" alt="img-fluide"></a></center>
-                </div>
+                </div>                
                 <div class="col-sm">
                     <center><a href=""><img src="img/azucar_blanca.jpg" class="img-fluid" alt="img-fluid"></a></center>
                 </div>
                 <div class="col-sm">
                     <center><a href=""><img src="img/atun.png" class="img-fluid" alt="img-fluid"></a></center>
+                </div>-->
+                <ul>
+                    <%                     
+                    ArrayList<Subcategoria> lstsubcate;
+                    Subcategoria SubCateObj;
+                    Clase ClasObj=null;
+                    ConsultaSubCategoria modsubcate=new ConsultaSubCategoria();
+                    lstsubcate=modsubcate.buscarSubcategoria(catObj);
+                    int acumfil=0;
+                    
+                    for (int i = 0; i < lstsubcate.size(); i++) {
+                        SubCateObj=null;
+                        SubCateObj= (Subcategoria)lstsubcate.get(i);
+                        if(acumfil+1>=20){
+                            acumfil=0;                
+                    %>
+                        </ul>
+                        </div>
+                        <div class="col-sm">
+                                <ul>
+                                <li><%=SubCateObj.getDescripcion()%>
+                                    <% acumfil+=1; 
+
+                                    ArrayList<Clase> lstclas;
+                                    
+                                    ConsultaClase modclas=new ConsultaClase();
+                                    lstclas=modclas.buscarClase(SubCateObj); 
+                                    
+                                    %>
+                                    <ul>
+                                        <% for (int j = 0; j < lstclas.size(); j++) {                                            
+                                            ClasObj=(Clase)lstclas.get(j);
+                                            acumfil+=1;
+                                        %>                                    
+                                        <li><a href="catalogo.jsp?idclase=<%=ClasObj.getId()%>"><%=ClasObj.getDescripcion()%></a></li>
+                                        <% } %>                                        
+                                    </ul>
+                                </li>
+                        <% }else{ %>
+                            
+                            <li><%=SubCateObj.getDescripcion()%>
+                                <% acumfil+=1; 
+                                
+                                ArrayList<Clase> lstclas;
+                                
+                                ConsultaClase modclas=new ConsultaClase();
+                                lstclas=modclas.buscarClase(SubCateObj);
+                                
+                                %>
+                                
+                                <ul>
+                                    <% for (int j = 0; j < lstclas.size(); j++) {                                            
+                                        ClasObj=(Clase)lstclas.get(j);
+                                        acumfil+=1;
+                                    %>                                    
+                                    <li><a href="catalogo.jsp?idclase=<%=ClasObj.getId()%>"><%=ClasObj.getDescripcion()%></a></li>
+                                    <% } %>                                        
+                                </ul>                                
+                            </li>
+                           
+                        <% }} %>
+                        </ul>
+                        </div>           
                 </div>
-            </div>
-        </div>
+       
         
-        <h1 style="color: #252850; margin-left: 50px;" class="mt-4">FRUTAS Y VERDURAS</h1><br>
+        <!--<h2 style="color: #252850; margin-left: 50px;" class="mt-4">FRUTAS Y VERDURAS</h2><br>
         <div class="container">
             <div class="row">
                 <div class="col-sm">
@@ -127,7 +219,7 @@
                     <center><img src="img/zapallo.JPG" class="img-fluid" alt="img-fluid" > </center>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <!--<footer class="footer mt-auto py-3">
             <div class="container">              
@@ -147,7 +239,7 @@
                         <p>Here you can use rows and columns to organize your footer content.</p>-->
                         
                         <div class="Footer-left">
-                            <h2 class="title-xl">Comunícate con nosotros</h2>
+                            <h3 class="title-xl">Comunícate con nosotros</h3>
                             <div class="Footer__phones">
                                 <div>
                                     Lima: <a title="Teléfono Lima" class="Footer__phonelink" href="tel:+5116746800">(511)674-6800</a>
@@ -157,7 +249,7 @@
                                 </div>
                             </div>
                             <div class="Footer__social">
-                                <h4 class="Footer__accordion__title">Síguenos en:</h4>
+                                <h3 class="Footer__accordion__title">Síguenos en:</h3>
                                 <div>
                                     <!--<a title="Facebook" class="Follow" href="" target="_blank">
                                         <i class="fa fa-facebook"></i><span>Facebook</span>
@@ -223,9 +315,6 @@
             <!-- Copyright -->
         </footer>
         <!-- Footer -->
-
-
-
         <!--js-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
