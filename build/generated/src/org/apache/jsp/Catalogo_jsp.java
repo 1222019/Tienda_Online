@@ -6,7 +6,7 @@ import javax.servlet.jsp.*;
 import modelo.*;
 import java.util.*;
 
-public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class Catalogo_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -85,9 +85,9 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <i class=\"fa fa-fw fa-sitemap\" ></i>Categorias\r\n");
       out.write("                        </a>\r\n");
       out.write("                        <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\r\n");
-      out.write("                            <a class=\"dropdown-item\" href=\"welcomeT.jsp?idcate=1\">Abarrotes</a>\r\n");
-      out.write("                            <a class=\"dropdown-item\" href=\"welcomeT.jsp?idcate=2\">Frutas y Verduras</a>\r\n");
-      out.write("                            <a class=\"dropdown-item\" href=\"#\">Lácteos y Huevos</a>\r\n");
+      out.write("                            <a class=\"dropdown-item\" href=\"welcome.jsp?idcate=1\">Abarrotes</a>\r\n");
+      out.write("                            <a class=\"dropdown-item\" href=\"welcome.jsp?idcate=2\">Frutas y Verduras</a>\r\n");
+      out.write("                            <!--<a class=\"dropdown-item\" href=\"#\">Lácteos y Huevos</a>-->\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </li>\r\n");
       out.write("                    \r\n");
@@ -147,142 +147,70 @@ public final class welcomeT_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\r\n");
       out.write("        </nav>\r\n");
       out.write("                                \r\n");
-      out.write("         ");
- 
-             Categoria catObj=new Categoria();
-             try{           
-                int idcate=0;
-                ArrayList<Categoria> lstCat; 
-                if(request.getParameter("idcate")=="" || request.getParameter("idcate")==null){
-                    idcate=1;
-                    System.out.println(request.getParameter("idcate"));
-                }else{
-                    idcate=Integer.parseInt(request.getParameter("idcate"));
-                }
-                catObj=new Categoria();
-                catObj.setId(idcate);
-                
-                ConsultaCategoria modCate=new ConsultaCategoria();
-                lstCat=modCate.buscarCategoria(catObj);
-                
-                for (int i = 0; i < lstCat.size(); i++) {
-                    catObj=null;
-                    catObj= (Categoria)lstCat.get(i);              
-                }
-                
-                
-                
-             }catch(Exception ex){
-             }
-
-            
-      out.write("                       \r\n");
+      out.write("                                \r\n");
       out.write("                        \r\n");
       out.write("        <img src=\"img/images.jpg\" class=\"img-fluid\" alt=\"img-fluid\" width=\"100%\">        \r\n");
-      out.write("        <h2 style=\"color: #252850; margin-left: 50px;\" class=\"mt-4\">");
-      out.print(catObj.getDescripcion() );
-      out.write("</h2>\r\n");
+      out.write("        <!--<h2 style=\"color: #252850; margin-left: 50px;\" class=\"mt-4\"></h2>-->\r\n");
       out.write("        \r\n");
       out.write("        <div class=\"container\">\r\n");
       out.write("            <div class=\"row\">\r\n");
-      out.write("                <!--<div class=\"col-sm\">\r\n");
+      out.write("                <div class=\"col-sm\">\r\n");
+      out.write("                    \r\n");
+      out.write("                    ");
+
+                        ArrayList<Producto> lstprod; 
+                        int idclase;
+                        Clase clasObj=new Clase();
+                        Producto prodObj=new Producto();
+                        /*idclase=Integer.parseInt(request.getParameter("idclase"));*/
+                        idclase=1;
+                        clasObj.setId(idclase);
+                        ConsultaProducto modProd = new ConsultaProducto();
+                        lstprod = modProd.listarCatalogo(clasObj);
+                        
+                        for (int i = 0; i < lstprod.size(); i++) {
+                            prodObj=null;
+                            prodObj= (Producto)lstprod.get(i);
+                    
+      out.write("\r\n");
+      out.write("                    <div style=\"float: left;\" >\r\n");
+      out.write("                        <img class=\"img-fluid\" src=\"img/");
+      out.print( prodObj.getImagen() );
+      out.write("\">\r\n");
+      out.write("                        <p>");
+      out.print(prodObj.getDescripcion());
+      out.write("</p><br>\r\n");
+      out.write("                        <p><span>Precio:</span>");
+      out.print(prodObj.getPrecio());
+      out.write("</p><br>\r\n");
+      out.write("                        <form>\r\n");
+      out.write("                            <span>Cant</span><input type=\"text\">\r\n");
+      out.write("                            <input type=\"submit\">\r\n");
+      out.write("                        </form>                        \r\n");
+      out.write("                    </div>\r\n");
+      out.write("                    \r\n");
+      out.write("                   \r\n");
+      out.write("                    ");
+}
+      out.write("\r\n");
+      out.write("                        \r\n");
+      out.write("\r\n");
+      out.write("                    \r\n");
+      out.write("                    \r\n");
+      out.write("                    \r\n");
       out.write("                    <center><a href=\"\"><img src=\"img/azucar.png\" class=\"img-fluid\" alt=\"img-fluide\"></a></center>\r\n");
       out.write("                </div>                \r\n");
-      out.write("                <div class=\"col-sm\">\r\n");
+      out.write("                \r\n");
+      out.write("                \r\n");
+      out.write("                <!--<div class=\"col-sm\">\r\n");
       out.write("                    <center><a href=\"\"><img src=\"img/azucar_blanca.jpg\" class=\"img-fluid\" alt=\"img-fluid\"></a></center>\r\n");
       out.write("                </div>\r\n");
       out.write("                <div class=\"col-sm\">\r\n");
       out.write("                    <center><a href=\"\"><img src=\"img/atun.png\" class=\"img-fluid\" alt=\"img-fluid\"></a></center>\r\n");
       out.write("                </div>-->\r\n");
-      out.write("                <ul>\r\n");
-      out.write("                    ");
-                     
-                    ArrayList<Subcategoria> lstsubcate;
-                    Subcategoria SubCateObj;
-                    Clase ClasObj=null;
-                    ConsultaSubCategoria modsubcate=new ConsultaSubCategoria();
-                    lstsubcate=modsubcate.buscarSubcategoria(catObj);
-                    int acumfil=0;
-                    
-                    for (int i = 0; i < lstsubcate.size(); i++) {
-                        SubCateObj=null;
-                        SubCateObj= (Subcategoria)lstsubcate.get(i);
-                        if(acumfil+1>=20){
-                            acumfil=0;                
-                    
-      out.write("\r\n");
-      out.write("                        </ul>\r\n");
-      out.write("                        </div>\r\n");
-      out.write("                        <div class=\"col-sm\">\r\n");
-      out.write("                                <ul>\r\n");
-      out.write("                                <li>");
-      out.print(SubCateObj.getDescripcion());
-      out.write("\r\n");
-      out.write("                                    ");
- acumfil+=1; 
-
-                                    ArrayList<Clase> lstclas;
-                                    
-                                    ConsultaClase modclas=new ConsultaClase();
-                                    lstclas=modclas.buscarClase(SubCateObj); 
-                                    
-                                    
-      out.write("\r\n");
-      out.write("                                    <ul>\r\n");
-      out.write("                                        ");
- for (int j = 0; j < lstclas.size(); j++) {                                            
-                                            ClasObj=(Clase)lstclas.get(i);
-                                            acumfil+=1;
-                                        
-      out.write("                                    \r\n");
-      out.write("                                        <li>");
-      out.print(ClasObj.getDescripcion());
-      out.write("</li>\r\n");
-      out.write("                                        ");
- } 
-      out.write("                                        \r\n");
-      out.write("                                    </ul>\r\n");
-      out.write("                                </li>\r\n");
-      out.write("                        ");
- }else{ 
-      out.write("\r\n");
-      out.write("                            \r\n");
-      out.write("                            <li>");
-      out.print(SubCateObj.getDescripcion());
-      out.write("\r\n");
-      out.write("                                ");
- acumfil+=1; 
-                                
-                                ArrayList<Clase> lstclas;
-                                
-                                ConsultaClase modclas=new ConsultaClase();
-                                lstclas=modclas.buscarClase(SubCateObj);
-                                
-                                
-      out.write("\r\n");
-      out.write("                                \r\n");
-      out.write("                                <ul>\r\n");
-      out.write("                                    ");
- for (int j = 0; j < lstclas.size(); j++) {                                            
-                                        ClasObj=(Clase)lstclas.get(i);
-                                        acumfil+=1;
-                                    
-      out.write("                                    \r\n");
-      out.write("                                    <li>");
-      out.print(ClasObj.getDescripcion());
-      out.write("</li>\r\n");
-      out.write("                                    ");
- } 
-      out.write("                                        \r\n");
-      out.write("                                </ul>                                \r\n");
-      out.write("                            </li>\r\n");
-      out.write("                           \r\n");
-      out.write("                        ");
- }} 
-      out.write("\r\n");
-      out.write("                        </ul>\r\n");
-      out.write("                        </div>           \r\n");
-      out.write("                </div>\r\n");
+      out.write("                \r\n");
+      out.write("            </div>           \r\n");
+      out.write("        </div>\r\n");
       out.write("       \r\n");
       out.write("        \r\n");
       out.write("        <!--<h2 style=\"color: #252850; margin-left: 50px;\" class=\"mt-4\">FRUTAS Y VERDURAS</h2><br>\r\n");

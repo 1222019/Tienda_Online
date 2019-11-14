@@ -174,7 +174,7 @@
                                             ClasObj=(Clase)lstclas.get(j);
                                             acumfil+=1;
                                         %>                                    
-                                        <li><a href="catalogo.jsp?idclase=<%=ClasObj.getId()%>"><%=ClasObj.getDescripcion()%></a></li>
+                                        <li><a href="Catalogo.jsp?idclase=<%=ClasObj.getId()%>"><%=ClasObj.getDescripcion()%></a></li>
                                         <% } %>                                        
                                     </ul>
                                 </li>
@@ -195,7 +195,7 @@
                                         ClasObj=(Clase)lstclas.get(j);
                                         acumfil+=1;
                                     %>                                    
-                                    <li><a href="catalogo.jsp?idclase=<%=ClasObj.getId()%>"><%=ClasObj.getDescripcion()%></a></li>
+                                    <li><a href="Catalogo.jsp?idclase=<%=ClasObj.getId()%>"><%=ClasObj.getDescripcion()%></a></li>
                                     <% } %>                                        
                                 </ul>                                
                             </li>

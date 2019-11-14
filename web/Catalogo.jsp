@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" href="css/estios.css"/>
     </head>
 
     
@@ -98,63 +98,52 @@
             </div>
         </nav>
                                 
-         <% 
-             Categoria catObj=new Categoria();
-             try{           
-                int idcate=0;
-                ArrayList<Categoria> lstCat; 
-                if(request.getParameter("idcate")=="" || request.getParameter("idcate")==null){
-                    idcate=1;
-                    System.out.println(request.getParameter("idcate"));
-                }else{
-                    idcate=Integer.parseInt(request.getParameter("idcate"));
-                }
-                catObj=new Categoria();
-                catObj.setId(idcate);
-                
-                ConsultaCategoria modCate=new ConsultaCategoria();
-                lstCat=modCate.buscarCategoria(catObj);
-                
-                for (int i = 0; i < lstCat.size(); i++) {
-                    catObj=null;
-                    catObj= (Categoria)lstCat.get(i);              
-                }
-                
-                
-                
-                
-                
-             }catch(Exception ex){
-             }
-
-            %>                       
+                                
                         
         <img src="img/images.jpg" class="img-fluid" alt="img-fluid" width="100%">        
         <!--<h2 style="color: #252850; margin-left: 50px;" class="mt-4"></h2>-->
         
         <div class="container">
             <div class="row">
-                <div class="col-sm">
+                
                     
                     <%
                         ArrayList<Producto> lstprod; 
                         int idclase;
-                        Clase clasObj=null;
-                        try{      
-                            idclase=Integer.parseInt(request.getParameter("idclase"));
-                        }                            
-                        catch(Exception ex){
-                        }
+                        Clase clasObj=new Clase();
+                        Producto prodObj=new Producto();
+                        idclase=Integer.parseInt(request.getParameter("idclase"));
+                        /*idclase=1;*/
+                        clasObj.setId(idclase);
+                        ConsultaProducto modProd = new ConsultaProducto();
+                        lstprod = modProd.listarCatalogo(clasObj);
                         
-                        
+                        for (int i = 0; i < lstprod.size(); i++) {
+                            prodObj=null;
+                            prodObj= (Producto)lstprod.get(i);
+                    %>
+                    <div class="col-xs-10 col-sm-6 col-md-3 product">
+                        <div class="card">                        
                             
+                            <img src="img/<%= prodObj.getImagen() %>">
+                            <h3><%=prodObj.getDescripcion()%></h3>
+                            <span>Precio:</span><h4><span>S/ </span><%=prodObj.getPrecio()%></h4>
+                            <form>
+                                <span>Cant</span><input type="text" id="txt-cantidad">
+                                <input type="submit">
+                            </form>                        
+                        </div>
+                    </div>
+                    
+                   
+                    <%}%>
                         
 
-                    %>
                     
                     
-                    <center><a href=""><img src="img/azucar.png" class="img-fluid" alt="img-fluide"></a></center>
-                </div>                
+                    
+                    <!--<center><a href=""><img src="img/azucar.png" class="img-fluid" alt="img-fluide"></a></center>-->
+                                
                 
                 
                 <!--<div class="col-sm">
