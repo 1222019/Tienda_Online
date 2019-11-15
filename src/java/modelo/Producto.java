@@ -18,6 +18,27 @@ public class Producto {
     Clase clas;
     String imagen;
 
+    public Producto() {
+    }
+       
+    public Producto( String descripcion, double precio, String unid, String imagen) {        
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.unid = unid;
+        this.clas = clas;
+        this.imagen = imagen;
+    }
+    
+    public Producto(int id, String descripcion, double precio, double precioant, String unid, Clase clas, String imagen) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.precioant = precioant;
+        this.unid = unid;
+        this.clas = clas;
+        this.imagen = imagen;
+    }    
+    
     public int getId() {
         return id;
     }

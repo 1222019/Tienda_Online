@@ -16,6 +16,10 @@ import java.util.ArrayList;
  * @author jjara
  */
 public class ConsultaProducto extends Conexion{
+
+    public ConsultaProducto() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public ArrayList<Producto> listarCatalogo(Clase clas){
         ArrayList<Producto> prods;
@@ -46,5 +50,29 @@ public class ConsultaProducto extends Conexion{
         }
         return null;
     }
+    
+    public Producto getCatalogo(int id){
+        Producto prod=null;
+        PreparedStatement ps=null;
+        ResultSet rs=null;
+        Connection con = getConnection();
+        String sql="SELECT descripcion,precio,unid,imagen FROM producto WHERE id=?";             
+        
+        try {            
+            ps=(PreparedStatement) con.prepareStatement(sql);
+            ps.setInt(1,id);
+            rs=ps.executeQuery();            
+            while(rs.next()){                
+                prod = new Producto(rs.getString("descripcion"),rs.getDouble("precio"),rs.getString("unid"),rs.getString("imagen"));         
+            }
+            return prod;          
+            //return false;
+        } catch (SQLException e) {
+            System.err.println(e);
+            //return false;
+        }
+        return null;
+    }
+    
     
 }

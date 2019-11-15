@@ -1,5 +1,12 @@
+<%@page import="controller.CtrlProd"%>
 <%@page import="modelo.*" %>
 <%@page import="java.util.*" %>
+<%
+    
+    HttpSession sesion = request.getSession(true);
+    ArrayList<Articulo> articulos =sesion.getAttribute("carrito")==null?null:(ArrayList)sesion.getAttribute("carrito");
+
+%>
 <!DOCTYPE html>
 <html>
 
@@ -71,16 +78,7 @@
 
                     </div>
                 </div>
-                <!---->
-                <!-- <form class="form-inline my-2 my-lg-0" style="margin-right: 10px;">
-                  
-                 <input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">
-                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit"style="color: #252850; border-width: 1px;
-             border-style: solid;
-             border-color: #252850;">Buscar</button>
-               </form>
-                 
-                <!---->
+                
                 <div class="dropdown" style="margin-right: 40px;">
 
                     <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #252850">
@@ -104,79 +102,53 @@
         <!--<h2 style="color: #252850; margin-left: 50px;" class="mt-4"></h2>-->
         
         <div class="container">
-            <div class="row">
+            
+            <div class="row">                    
                 
-                    
-                    <%
-                        ArrayList<Producto> lstprod; 
-                        int idclase;
-                        Clase clasObj=new Clase();
-                        Producto prodObj=new Producto();
-                        idclase=Integer.parseInt(request.getParameter("idclase"));
-                        /*idclase=1;*/
-                        clasObj.setId(idclase);
-                        ConsultaProducto modProd = new ConsultaProducto();
-                        lstprod = modProd.listarCatalogo(clasObj);
-                        
-                        for (int i = 0; i < lstprod.size(); i++) {
-                            prodObj=null;
-                            prodObj= (Producto)lstprod.get(i);
-                    %>
-                    <div class="col-xs-10 col-sm-6 col-md-3 product">
-                        <div class="card">                        
-                            
-                            <img src="img/<%= prodObj.getImagen() %>">
-                            <h3><%=prodObj.getDescripcion()%></h3>
-                            <span>Precio:</span><h4><span>S/ </span><%=prodObj.getPrecio()%></h4>
-                            <form action="agregarItem" method="POST">
-                                <input type="hidden" id="txt-idprod" name="idprod" value="<%= prodObj.getId()%>">
-                                <span>Cant</span><input type="text" id="txt-cantidad" name="cantidad">                                
-                                <input type="submit" class="" value="Agregar">
-                            </form>                        
-                        </div>
-                    </div>
-                    
-                   
-                    <%}%>
-                        
-
-                    
-                    
-                    
-                    <!--<center><a href=""><img src="img/azucar.png" class="img-fluid" alt="img-fluide"></a></center>-->
-                                
-                
-                
-                <!--<div class="col-sm">
-                    <center><a href=""><img src="img/azucar_blanca.jpg" class="img-fluid" alt="img-fluid"></a></center>
+                <div class="col-xs-10 col-sm-6 col-md-3 ">
+                    <span>Imagen</span>
+                </div> 
+                <div class="col-xs-10 col-sm-6 col-md-3 ">
+                    <span>Descripcion</span>
                 </div>
-                <div class="col-sm">
-                    <center><a href=""><img src="img/atun.png" class="img-fluid" alt="img-fluid"></a></center>
-                </div>-->
+
+                <div class="col-xs-10 col-sm-6 col-md-3 ">
+                       <span>Cantidad</span>
+                </div>
+
+                <div class="col-xs-10 col-sm-6 col-md-3 ">
+                    <span>Precio</span>
+                </div>                               
+                
+            </div>
+            
+            <div class="row">                    
+                <%
+                    CtrlProd CProd=new CtrlProd();
+                    for(Articulo a: articulos){
+                        Producto prodObj = CProd.getProducto(a.getIdprod());              
+                %>
+                <div class="col-xs-10 col-sm-6 col-md-3 ">
+                    <img src="img/"<%=prodObj.getImagen() %>/>
+                </div> 
+                <div class="col-xs-10 col-sm-6 col-md-3 ">
+                    <span><%=prodObj.getDescripcion() %></span>
+                </div>
+
+                <div class="col-xs-10 col-sm-6 col-md-3 ">
+                       <span><%=a.getCant()%></span>
+                </div>
+
+                <div class="col-xs-10 col-sm-6 col-md-3 ">
+                    <span><%=prodObj.getPrecio() %></span>
+                </div>
+
+                <% } %>                
                 
             </div>           
         </div>
-       
+           
         
-        <!--<h2 style="color: #252850; margin-left: 50px;" class="mt-4">FRUTAS Y VERDURAS</h2><br>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <center> <img src="img/naranja.JPG" class="img-fluid" alt="img-fluid" > </center>
-                </div>
-                <div class="col-sm">
-                    <center><img src="img/tomate.JPG" class="img-fluid" alt="img-fluid" > </center>
-                </div>
-                <div class="col-sm">
-                    <center><img src="img/zapallo.JPG" class="img-fluid" alt="img-fluid" > </center>
-                </div>
-            </div>
-        </div>-->
-
-        <!--<footer class="footer mt-auto py-3">
-            <div class="container">              
-            </div>
-        </footer>-->
         
         <!-- Footer -->
         <footer class="page-footer font-small blue pt-4 ">

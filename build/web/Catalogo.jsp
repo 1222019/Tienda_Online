@@ -128,9 +128,10 @@
                             <img src="img/<%= prodObj.getImagen() %>">
                             <h3><%=prodObj.getDescripcion()%></h3>
                             <span>Precio:</span><h4><span>S/ </span><%=prodObj.getPrecio()%></h4>
-                            <form>
-                                <span>Cant</span><input type="text" id="txt-cantidad">
-                                <input type="submit">
+                            <form action="agregarItem" method="POST">
+                                <input type="hidden" id="txt-idprod" name="idprod" value="<%= prodObj.getId()%>">
+                                <span>Cant</span><input type="text" id="txt-cantidad" name="cantidad">                                
+                                <input type="submit" class="" value="Agregar">
                             </form>                        
                         </div>
                     </div>

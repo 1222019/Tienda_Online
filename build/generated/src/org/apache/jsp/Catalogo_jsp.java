@@ -61,7 +61,7 @@ public final class Catalogo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.8.2/css/all.css\"/>\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n");
-      out.write("        \r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"css/estios.css\"/>\r\n");
       out.write("    </head>\r\n");
       out.write("\r\n");
       out.write("    \r\n");
@@ -154,7 +154,7 @@ public final class Catalogo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        \r\n");
       out.write("        <div class=\"container\">\r\n");
       out.write("            <div class=\"row\">\r\n");
-      out.write("                <div class=\"col-sm\">\r\n");
+      out.write("                \r\n");
       out.write("                    \r\n");
       out.write("                    ");
 
@@ -162,8 +162,8 @@ public final class Catalogo_jsp extends org.apache.jasper.runtime.HttpJspBase
                         int idclase;
                         Clase clasObj=new Clase();
                         Producto prodObj=new Producto();
-                        /*idclase=Integer.parseInt(request.getParameter("idclase"));*/
-                        idclase=1;
+                        idclase=Integer.parseInt(request.getParameter("idclase"));
+                        /*idclase=1;*/
                         clasObj.setId(idclase);
                         ConsultaProducto modProd = new ConsultaProducto();
                         lstprod = modProd.listarCatalogo(clasObj);
@@ -173,20 +173,26 @@ public final class Catalogo_jsp extends org.apache.jasper.runtime.HttpJspBase
                             prodObj= (Producto)lstprod.get(i);
                     
       out.write("\r\n");
-      out.write("                    <div style=\"float: left;\" >\r\n");
-      out.write("                        <img class=\"img-fluid\" src=\"img/");
+      out.write("                    <div class=\"col-xs-10 col-sm-6 col-md-3 product\">\r\n");
+      out.write("                        <div class=\"card\">                        \r\n");
+      out.write("                            \r\n");
+      out.write("                            <img src=\"img/");
       out.print( prodObj.getImagen() );
       out.write("\">\r\n");
-      out.write("                        <p>");
+      out.write("                            <h3>");
       out.print(prodObj.getDescripcion());
-      out.write("</p><br>\r\n");
-      out.write("                        <p><span>Precio:</span>");
+      out.write("</h3>\r\n");
+      out.write("                            <span>Precio:</span><h4><span>S/ </span>");
       out.print(prodObj.getPrecio());
-      out.write("</p><br>\r\n");
-      out.write("                        <form>\r\n");
-      out.write("                            <span>Cant</span><input type=\"text\">\r\n");
-      out.write("                            <input type=\"submit\">\r\n");
-      out.write("                        </form>                        \r\n");
+      out.write("</h4>\r\n");
+      out.write("                            <form action=\"agregarItem\" method=\"POST\">\r\n");
+      out.write("                                <input type=\"hidden\" id=\"txt-idprod\" name=\"idprod\" value=\"");
+      out.print( prodObj.getId());
+      out.write("\">\r\n");
+      out.write("                                <span>Cant</span><input type=\"text\" id=\"txt-cantidad\" name=\"cantidad\">                                \r\n");
+      out.write("                                <input type=\"submit\" class=\"\" value=\"Agregar\">\r\n");
+      out.write("                            </form>                        \r\n");
+      out.write("                        </div>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    \r\n");
       out.write("                   \r\n");
@@ -198,8 +204,8 @@ public final class Catalogo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    \r\n");
       out.write("                    \r\n");
       out.write("                    \r\n");
-      out.write("                    <center><a href=\"\"><img src=\"img/azucar.png\" class=\"img-fluid\" alt=\"img-fluide\"></a></center>\r\n");
-      out.write("                </div>                \r\n");
+      out.write("                    <!--<center><a href=\"\"><img src=\"img/azucar.png\" class=\"img-fluid\" alt=\"img-fluide\"></a></center>-->\r\n");
+      out.write("                                \r\n");
       out.write("                \r\n");
       out.write("                \r\n");
       out.write("                <!--<div class=\"col-sm\">\r\n");
