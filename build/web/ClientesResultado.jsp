@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="java.sql.*"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -101,67 +100,63 @@
         </nav>
 
         <br><br>
-        <h3 style="margin-left: 50px;"><i class="fa fa-fw fa-vcard" ></i> Datos Clientes</3>
-            <br><br>
+        <h3 style="margin-left: 50px;"><i class="fa fa-fw fa-vcard" ></i> Listado Clientes</h2>
+            <br>
+            <div class="container">
 
-            <form action="">
-
-                <table border="1" width="250" align="center">
-                    <tr>
-                        <td>Cliente: </td>
-                        <td><input type="text" name="txtcliente"></td>
-                    </tr>
-                    <tr>
-                        <td>Descripciòn: </td>
-                        <td><input type="text" name="txtdescripcion"></td>
-                    </tr>
-                    <tr>
-                        <td>Direcciòn:  </td>
-                        <td><input type="text" name="txtdireccion"></td>
-                    </tr>
-                    <tr>
-                        <td>Correo: </td>
-                        <td><input type="text" name="txtcorreo"></td>
-                    </tr>
-                    <tr>
-                        <th colspan="2">
-                            <input type="submit" name="btnguardarCliente" value="Guardar">
-                        </th>
-                    </tr>
-                </table>
-
-            </form>
-
-            <%
-
-                if (request.getParameter("btnguardarCliente") != null) {
-                    String cli = request.getParameter("txtcliente");
-                    String descr = request.getParameter("txtdescripcion");
-                    String direcc = request.getParameter("txtdireccion");
-                    String correo = request.getParameter("txtcorreo");
-
+             <table class="table table-bordered"   style="font-size: 17px; text-align: center;">
+                <tr bgcolor="skyblue">
+                    <th colspan="5"> Mantenimiento de Clientes</th>
+                    <th>
+                        <a href="Clientes.jsp">
+                            <img src="Iconos/agregar.png"width="30" height="30"></a></th>
+                </tr>
+                <tr >
+                    <th>Còdigo</th>
+                    <th>Cliente</th>
+                    <th>Descripciòn</th>
+                    <th>Direcciòn</th>
+                    <th>Correo</th>
+                    <th>Acción</th>
+                </tr>
+                <%
                     Connection cnx = null;
-                    ResultSet res = null;
                     Statement sta = null;
+                    ResultSet rs = null;
 
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
                         cnx = DriverManager.getConnection("jdbc:mysql://localhost/venta?user=root&password=");
-
                         sta = cnx.createStatement();
+                        rs = sta.executeQuery("select * from cliente");
+                        while (rs.next()) {
 
-                        sta.executeUpdate("insert into cliente(Cliente, Descripcion,Direccion,Correo) values('" + cli + "','" + descr + "','" + direcc + "','" + correo + "')");
-                        request.getRequestDispatcher("ClientesResultado.jsp").forward(request, response);
+                %>
+                <tr>
+                    <th style="font-weight: 100;"> <%=rs.getString(1)%> </th>
+                    <th style="font-weight: 100;"> <%=rs.getString(2)%> </th>
+                    <th style="font-weight: 100;"> <%=rs.getString(3)%> </th>
+                    <th style="font-weight: 100;"> <%=rs.getString(4)%> </th>
+                    <th style="font-weight: 100;"> <%=rs.getString(5)%> </th>
+                    <th style="font-weight: 100;"> <img src="Iconos/editar.png"width="30" height="30">||
+                        <a href="eliminar.jsp?id=<%=rs.getString(1)%>">
+                            <img src="Iconos/eliminar.png" width="30" height="30">
+                        </a>
+                    </th>
+                </tr>
+                <%
+                        }
+
+                        sta.close();
+                        rs.close();
+                        cnx.close();
 
                     } catch (Exception e) {
 
-                        out.print(e + "");
-
                     }
-                }
 
-
-            %>
+                %>
+             </table></div>
 
             <!--<a href="datos.jsp" >volver</a> -->
 

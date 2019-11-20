@@ -1,7 +1,7 @@
 <%-- 
-    Document   : CarnesAvesyPescados
-    Created on : 30-oct-2019, 23:02:47
-    Author     : jesus
+    Document   : eliminar
+    Created on : 19/11/2019, 09:21:00 PM
+    Author     : us
 --%>
 
 <%@page import="java.sql.*"%>
@@ -100,74 +100,37 @@
             </div>
         </nav>
 
-        <br><br>
-        <h3 style="margin-left: 50px;"><i class="fa fa-fw fa-vcard" ></i> Datos Clientes</3>
-            <br><br>
+        <%
 
-            <form action="">
+            String cod = request.getParameter("id");
 
-                <table border="1" width="250" align="center">
-                    <tr>
-                        <td>Cliente: </td>
-                        <td><input type="text" name="txtcliente"></td>
-                    </tr>
-                    <tr>
-                        <td>Descripciòn: </td>
-                        <td><input type="text" name="txtdescripcion"></td>
-                    </tr>
-                    <tr>
-                        <td>Direcciòn:  </td>
-                        <td><input type="text" name="txtdireccion"></td>
-                    </tr>
-                    <tr>
-                        <td>Correo: </td>
-                        <td><input type="text" name="txtcorreo"></td>
-                    </tr>
-                    <tr>
-                        <th colspan="2">
-                            <input type="submit" name="btnguardarCliente" value="Guardar">
-                        </th>
-                    </tr>
-                </table>
+            Connection cnx = null;
+            ResultSet res = null;
+            Statement sta = null;
 
-            </form>
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                cnx = DriverManager.getConnection("jdbc:mysql://localhost/venta?user=root&password=");
 
-            <%
+                sta = cnx.createStatement();
 
-                if (request.getParameter("btnguardarCliente") != null) {
-                    String cli = request.getParameter("txtcliente");
-                    String descr = request.getParameter("txtdescripcion");
-                    String direcc = request.getParameter("txtdireccion");
-                    String correo = request.getParameter("txtcorreo");
+                sta.executeUpdate("delete from cliente where id='" + cod + "'");
+                request.getRequestDispatcher("ClientesResultado.jsp").forward(request, response);
 
-                    Connection cnx = null;
-                    ResultSet res = null;
-                    Statement sta = null;
+            } catch (Exception e) {
 
-                    try {
-                        Class.forName("com.mysql.jdbc.Driver");
-                        cnx = DriverManager.getConnection("jdbc:mysql://localhost/venta?user=root&password=");
+                out.print(e + "");
 
-                        sta = cnx.createStatement();
-
-                        sta.executeUpdate("insert into cliente(Cliente, Descripcion,Direccion,Correo) values('" + cli + "','" + descr + "','" + direcc + "','" + correo + "')");
-                        request.getRequestDispatcher("ClientesResultado.jsp").forward(request, response);
-
-                    } catch (Exception e) {
-
-                        out.print(e + "");
-
-                    }
-                }
+            }
 
 
-            %>
+        %>
 
-            <!--<a href="datos.jsp" >volver</a> -->
+        <!--<a href="datos.jsp" >volver</a> -->
 
-            <!---->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!---->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
