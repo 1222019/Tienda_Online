@@ -40,6 +40,8 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="welcome.jsp?idcate=1">Abarrotes</a>
                             <a class="dropdown-item" href="welcome.jsp?idcate=2">Frutas y Verduras</a>
+                            <a class="dropdown-item" href="welcome.jsp?idcate=4">Carnes, Aves y Pescado</a>
+                            <a class="dropdown-item" href="welcome.jsp?idcate=7">Bebidas, Cervezas y Licores</a>
                             <!--<a class="dropdown-item" href="#">Lácteos y Huevos</a>-->
                         </div>
                     </li>
@@ -141,6 +143,10 @@
                 <div class="col-sm">
                     <center><a href=""><img src="img/atun.png" class="img-fluid" alt="img-fluid"></a></center>
                 </div>-->
+                
+                <div class="col-sm">
+                               
+                
                 <ul>
                     <%                     
                     ArrayList<Subcategoria> lstsubcate;
@@ -202,7 +208,8 @@
                            
                         <% }} %>
                         </ul>
-                        </div>           
+                        </div>
+                    </div>
                 </div>
        
         

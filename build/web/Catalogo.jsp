@@ -40,6 +40,8 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="welcome.jsp?idcate=1">Abarrotes</a>
                             <a class="dropdown-item" href="welcome.jsp?idcate=2">Frutas y Verduras</a>
+                            <a class="dropdown-item" href="welcome.jsp?idcate=4">Carnes, Aves y Pescado</a>
+                            <a class="dropdown-item" href="welcome.jsp?idcate=7">Bebidas, Cervezas y Licores</a>
                             <!--<a class="dropdown-item" href="#">Lácteos y Huevos</a>-->
                         </div>
                     </li>
@@ -100,7 +102,7 @@
                                 
                                 
                         
-        <img src="img/images.jpg" class="img-fluid" alt="img-fluid" width="100%">        
+        <!--<img src="img/images.jpg" class="img-fluid" alt="img-fluid" width="100%"> -->       
         <!--<h2 style="color: #252850; margin-left: 50px;" class="mt-4"></h2>-->
         
         <div class="container">
@@ -127,11 +129,19 @@
                             
                             <img src="img/<%= prodObj.getImagen() %>">
                             <h3><%=prodObj.getDescripcion()%></h3>
-                            <span>Precio:</span><h4><span>S/ </span><%=prodObj.getPrecio()%></h4>
+                            <span>Precio</span><h4><span>S/ </span><%=prodObj.getPrecio()%></h4>
                             <form action="agregarItem" method="POST">
-                                <input type="hidden" id="txt-idprod" name="idprod" value="<%= prodObj.getId()%>">
-                                <span>Cant</span><input type="text" id="txt-cantidad" name="cantidad">                                
-                                <input type="submit" class="" value="Agregar">
+                                <input type="hidden" id="txt-idprod" name="idprod" value="<%= prodObj.getId()%>" class="form-control">
+                                <!--<span>Cant</span><input type="text" id="txt-cantidad" name="cantidad">    -->
+                                <div class="form-group">
+                                    
+                                        <span>Cant</span>
+                                        <input type="text" id="txt-cantidad" name="cantidad" class="form-control">
+                                                                       
+                                </div>                    
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" value="Agregar">Agregar</button>
+                                </div>
                             </form>                        
                         </div>
                     </div>
