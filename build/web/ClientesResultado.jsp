@@ -1,7 +1,7 @@
 <%-- 
-    Document   : CarnesAvesyPescados
-    Created on : 30-oct-2019, 23:02:47
-    Author     : jesus
+    Document   : ClientesResultado
+    Created on : 19/11/2019, 08:22:50 PM
+    Author     : us
 --%>
 
 <%@page import="java.sql.*"%>
@@ -100,18 +100,20 @@
         </nav>
 
         <br><br>
-        <h3 style="margin-left: 50px;"><i class="fa fa-fw fa-vcard" ></i> Listado Clientes</h2>
-            <br>
-            <div class="container">
 
-             <table class="table table-bordered"   style="font-size: 17px; text-align: center;">
+        <h2 align="center" style="margin-left: 50px;"><i class="fa fa-fw fa-vcard" ></i> Listado Clientes</2>
+            <br><br>
+
+            <table border="1" width="600" align="center">
+
                 <tr bgcolor="skyblue">
                     <th colspan="5"> Mantenimiento de Clientes</th>
                     <th>
                         <a href="Clientes.jsp">
-                            <img src="Iconos/agregar.png"width="30" height="30"></a></th>
+
+                        <img src="Iconos/agregar.png"width="30" height="30"></a></th>
                 </tr>
-                <tr >
+                <tr bgcolor="skyblue">
                     <th>Còdigo</th>
                     <th>Cliente</th>
                     <th>Descripciòn</th>
@@ -133,6 +135,7 @@
 
                 %>
                 <tr>
+
                     <th style="font-weight: 100;"> <%=rs.getString(1)%> </th>
                     <th style="font-weight: 100;"> <%=rs.getString(2)%> </th>
                     <th style="font-weight: 100;"> <%=rs.getString(3)%> </th>
@@ -143,6 +146,7 @@
                             <img src="Iconos/eliminar.png" width="30" height="30">
                         </a>
                     </th>
+
                 </tr>
                 <%
                         }
@@ -156,7 +160,8 @@
                     }
 
                 %>
-             </table></div>
+            </table>
+
 
             <!--<a href="datos.jsp" >volver</a> -->
 
