@@ -1,11 +1,10 @@
 <%-- 
-    Document   : CarnesAvesyPescados
-    Created on : 30-oct-2019, 23:02:47
-    Author     : jesus
+    Document   : ClientesResultado
+    Created on : 19/11/2019, 08:22:50 PM
+    Author     : us
 --%>
 
 <%@page import="java.sql.*"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -99,146 +98,67 @@
                 </div>
             </div>
         </nav>
-        
+
         <br><br>
-        <h3 style="margin-left: 50px;"><i class="fa fa-fw fa-vcard" ></i> Datos Clientes</3>
+        <h2 align="center" style="margin-left: 50px;"><i class="fa fa-fw fa-vcard" ></i> Listado Clientes</2>
             <br><br>
 
-            <form action="">
-
-                <table border="1" width="250" align="center">
-                    <tr>
-                        <td>Cliente: </td>
-                        <td><input type="text" name="txtcliente"></td>
-                    </tr>
-                    <tr>
-                        <td>Descripciòn: </td>
-                        <td><input type="text" name="txtdescripcion"></td>
-                    </tr>
-                    <tr>
-                        <td>Direcciòn:  </td>
-                        <td><input type="text" name="txtdireccion"></td>
-                    </tr>
-                    <tr>
-                        <td>Correo: </td>
-                        <td><input type="text" name="txtcorreo"></td>
-                    </tr>
-                    <tr>
-                        <th colspan="2">
-                            <input type="submit" name="btnguardarCliente" value="Guardar">
-                        </th>
-                    </tr>
-                </table>
-
-            </form>
-
-            <%
-
-                if (request.getParameter("btnguardarCliente") != null) {
-                    String cli = request.getParameter("txtcliente");
-                    String descr = request.getParameter("txtdescripcion");
-                    String direcc = request.getParameter("txtdireccion");
-                    String correo = request.getParameter("txtcorreo");
-
+            <table border="1" width="600" align="center">
+                <tr bgcolor="skyblue">
+                    <th colspan="5"> Mantenimiento de Clientes</th>
+                    <th>
+                        <a href="Clientes.jsp">
+                        <img src="Iconos/agregar.png"width="30" height="30"></a></th>
+                </tr>
+                <tr bgcolor="skyblue">
+                    <th>Còdigo</th>
+                    <th>Cliente</th>
+                    <th>Descripciòn</th>
+                    <th>Direcciòn</th>
+                    <th>Correo</th>
+                    <th>Acción</th>
+                </tr>
+                <%
                     Connection cnx = null;
-                    ResultSet res = null;
                     Statement sta = null;
+                    ResultSet rs = null;
 
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
                         cnx = DriverManager.getConnection("jdbc:mysql://localhost/venta?user=root&password=");
-
                         sta = cnx.createStatement();
+                        rs = sta.executeQuery("select * from cliente");
+                        while (rs.next()) {
 
-                        sta.executeUpdate("insert into cliente(Cliente, Descripcion,Direccion,Correo) values('" + cli + "','" + descr + "','" + direcc + "','" + correo + "')");
-                        request.getRequestDispatcher("ClientesResultado.jsp").forward(request, response);
+                %>
+                <tr>
+                    <th> <%=rs.getString(1)%> </th>
+                    <th> <%=rs.getString(2)%> </th>
+                    <th> <%=rs.getString(3)%> </th>
+                    <th> <%=rs.getString(4)%> </th>
+                    <th> <%=rs.getString(5)%> </th>
+                    <th> <img src="Iconos/editar.png"width="30" height="30">||
+                        <img src="Iconos/eliminar.png"width="30" height="30"></th>
+                </tr>
+                <%
+                        }
+
+                        sta.close();
+                        rs.close();
+                        cnx.close();
 
                     } catch (Exception e) {
 
-                        out.print(e + "");
-
                     }
-                }
 
-
-            %>
+                %>
+            </table>
 
             <!--<a href="datos.jsp" >volver</a> -->
-        
-        <!---->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+            <!---->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
